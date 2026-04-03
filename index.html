@@ -6,439 +6,257 @@
 <title>81zy LLC. | ハイジィ合同会社</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg:       #050810;
-  --s1:       #0a0e18;
-  --s2:       #0f1628;
-  --s3:       #141c32;
-  --c:        #00eeff;   /* cyan  */
-  --p:        #00eeff;   /* accent */
-  --w:        #ffffff;
-  --text:     #e8f2f8;
-  --dim:      #b0c8d8;
-  --line:     #0d1828;
-  --cg: rgba(0,238,255,.18);
-  --pg: rgba(0,238,255,.10);
+  --dark-bg:      #15181e;
+  --darker-bg:    #0d0e12;
+  --light-bg:     #ffffff;
+  --subtle-bg:    #f1f2f3;
+  --tf-purple:    #7b42bc;
+  --action-blue:  #2264d6;
+  --text-dark:    #000000;
+  --text-mid:     #3b3d45;
+  --text-dim:     #656a76;
+  --text-light:   #efeff1;
+  --text-muted:   #d5d7db;
+  --border-light: rgba(178,182,189,0.3);
+  --border-dark:  rgba(97,104,117,1);
+  --shadow-micro: rgba(97,104,117,0.05) 0px 1px 1px, rgba(97,104,117,0.05) 0px 2px 2px;
 }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
+  background: var(--light-bg);
+  color: var(--text-dark);
+  font-family: 'Noto Sans JP', system-ui, -apple-system, Arial, sans-serif;
+  font-weight: 400;
   overflow-x: hidden;
 }
-/* grain removed */
 
 /* ─── NAV ─── */
 nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  height:52px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 3rem;
-  background:rgba(5,8,16,.95);
-  backdrop-filter:blur(16px);
-}
-nav::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg,transparent 0%,var(--c) 50%,transparent 100%);
-  opacity:.25;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem;
+  background: rgba(21,24,30,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(97,104,117,0.3);
 }
 .logo {
-  font-family:'JetBrains Mono',monospace; font-size:.95rem;
-  letter-spacing:.08em; color:#fff; text-decoration:none;
-  display:flex; align-items:center; gap:.35rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: .9rem; font-weight: 700;
+  letter-spacing: .04em; color: #fff; text-decoration: none;
+  display: flex; align-items: center; gap: .45rem;
 }
-.logo-mark {
-  width:22px; height:22px; flex-shrink:0;
-  transition:opacity .2s;
-}
-.logo:hover .logo-mark { opacity:.8; }
+.logo-mark { width: 22px; height: 22px; flex-shrink: 0; transition: opacity .2s; }
+.logo:hover .logo-mark { opacity: .8; }
 
-nav ul { list-style:none; display:flex; }
+nav ul { list-style: none; display: flex; }
 nav ul li a {
-  display:block; padding:0 1.1rem; line-height:52px;
-  font-family:'JetBrains Mono',monospace; font-size:.68rem;
-  letter-spacing:.08em; color:var(--dim); text-decoration:none;
-  border-left:1px solid var(--line);
-  transition:color .2s, background .2s;
+  display: block; padding: 0 1rem; line-height: 58px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: .875rem; font-weight: 500;
+  color: var(--text-muted); text-decoration: none;
+  transition: color .2s;
 }
-nav ul li a:hover { color:var(--c); background:rgba(0,238,255,.04); }
+nav ul li a:hover { color: #fff; }
 
-/* ─── HERO ─── */
+.nav-cta {
+  display: inline-flex; align-items: center;
+  font-family: 'Noto Sans JP', sans-serif; font-size: .8rem; font-weight: 600;
+  color: #fff; background: var(--tf-purple);
+  padding: 8px 18px; border-radius: 5px;
+  text-decoration: none;
+  box-shadow: var(--shadow-micro);
+  transition: opacity .2s;
+}
+.nav-cta:hover { opacity: .88; }
+
+/* ─── HERO (dark) ─── */
+.hero-wrap { background: var(--dark-bg); }
 .hero {
-  min-height:100vh;
-  display:grid; grid-template-columns:1fr 320px;
-  border-bottom:1px solid var(--line);
-  position:relative; z-index:1; overflow:hidden;
+  max-width: 1150px; margin: 0 auto;
+  padding: 8rem 3rem 6rem;
 }
-
-/* animated grid bg */
-.hero-grid {
-  position:absolute; inset:0; pointer-events:none;
-  background:
-    linear-gradient(rgba(0,238,255,.022) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,238,255,.022) 1px,transparent 1px);
-  background-size:48px 48px;
+.h-label {
+  font-family: 'Noto Sans JP', sans-serif; font-size: .8rem; font-weight: 600;
+  letter-spacing: 1.3px; text-transform: uppercase;
+  color: var(--tf-purple); margin-bottom: 1.6rem;
 }
-/* glow blobs */
-.blob1 {
-  position:absolute; width:700px; height:700px;
-  left:-200px; top:50%; transform:translateY(-50%);
-  background:radial-gradient(circle,rgba(0,238,255,.06) 0%,transparent 65%);
-  pointer-events:none;
-}
-.blob2 {
-  position:absolute; width:500px; height:500px;
-  right:280px; top:30%;
-  background:radial-gradient(circle,rgba(0,238,255,.05) 0%,transparent 65%);
-  pointer-events:none;
-}
-
-.hero-left {
-  padding:5.5rem 3rem 4rem;
-  display:flex; flex-direction:column; justify-content:space-between;
-  border-right:1px solid var(--line);
-  position:relative;
-}
-
-.h-eyebrow {
-  font-family:'JetBrains Mono',monospace; font-size:.62rem;
-  letter-spacing:.2em; text-transform:uppercase;
-  color:var(--c); opacity:.7;
-  display:flex; align-items:center; gap:.8rem;
-  margin-bottom:1.5rem;
-}
-.h-eyebrow::before {
-  content:'';display:block;width:24px;height:1px;
-  background:var(--c); box-shadow:0 0 6px var(--c);
-}
-
 .hero h1 {
-  font-family:'Orbitron',monospace; font-weight:900;
-  font-size:clamp(2.4rem,5.5vw,5.5rem);
-  line-height:1.1; letter-spacing:.01em;
-  color:#fff;
-  text-shadow:0 0 60px rgba(255,255,255,.06);
-  max-width:660px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.17; color: var(--text-light);
+  max-width: 720px;
 }
-.hero h1 .ch { color:var(--c); }
-.hero h1 .ph { color:var(--c); font-style:italic; }
-
+.hero h1 .accent { color: var(--tf-purple); }
 .hero-body {
-  margin-top:1.8rem;
-  font-family:'JetBrains Mono',monospace; font-size:.8rem; line-height:2.1;
-  color:var(--dim); max-width:520px;
+  margin-top: 1.8rem;
+  font-size: 1.1rem; line-height: 1.65;
+  color: var(--text-muted); max-width: 560px;
 }
-.hero-body .slash { color:var(--c); opacity:.4; }
-
 .h-actions {
-  margin-top:2rem; display:flex; gap:1.2rem; flex-wrap:wrap;
+  margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
 }
-.btn-a {
-  display:inline-flex; align-items:center; gap:.7rem;
-  font-family:'JetBrains Mono',monospace; font-size:.73rem; letter-spacing:.1em;
-  color:var(--bg); background:var(--c); padding:.85rem 1.8rem;
-  text-decoration:none; font-weight:700;
-  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-  box-shadow:0 0 24px rgba(0,238,255,.3);
-  transition:background .2s,box-shadow .2s;
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Noto Sans JP', sans-serif; font-size: .875rem; font-weight: 600;
+  color: #fff; background: var(--tf-purple);
+  padding: 9px 15px; border-radius: 5px;
+  text-decoration: none;
+  box-shadow: var(--shadow-micro);
+  transition: opacity .2s;
 }
-.btn-a:hover { background:#fff; box-shadow:0 0 40px rgba(0,238,255,.5); }
-.btn-b {
-  display:inline-flex; align-items:center; gap:.7rem;
-  font-family:'JetBrains Mono',monospace; font-size:.73rem; letter-spacing:.1em;
-  color:var(--c); border:1px solid rgba(0,238,255,.3); padding:.85rem 1.8rem;
-  text-decoration:none;
-  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-  transition:all .2s;
+.btn-primary:hover { opacity: .88; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Noto Sans JP', sans-serif; font-size: .875rem; font-weight: 500;
+  color: var(--text-muted); background: var(--dark-bg);
+  border: 1px solid var(--border-light);
+  padding: 9px 15px; border-radius: 5px;
+  text-decoration: none;
+  box-shadow: var(--shadow-micro);
+  transition: border-color .2s, color .2s;
 }
-.btn-b:hover { background:rgba(0,238,255,.08); border-color:var(--c); box-shadow:0 0 20px rgba(0,238,255,.2); }
-
+.btn-secondary:hover { border-color: rgba(178,182,189,0.6); color: #fff; }
 .h-stats {
-  display:flex; gap:2rem; margin-top:2.5rem;
-  padding-top:2rem; border-top:1px solid var(--line);
+  display: flex; gap: 3rem; margin-top: 4rem;
+  padding-top: 2.5rem; border-top: 1px solid rgba(97,104,117,0.25);
 }
-.hst { padding-left:1rem; border-left:2px solid; }
-.hst.c { border-color:var(--c); }
-.hst.p { border-color:var(--c); }
-.hst-n { font-family:'Orbitron',monospace; font-size:1.7rem; font-weight:700; }
-.hst.c .hst-n { color:var(--c); }
-.hst.p .hst-n { color:var(--c); }
-.hst-l { font-family:'JetBrains Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-top:.3rem; }
-
-/* HERO RIGHT PANEL */
-.hero-right {
-  display:flex; flex-direction:column;
-  padding-top:5.5rem;
-  background:var(--s1);
+.hst { padding-left: 1rem; border-left: 2px solid var(--tf-purple); }
+.hst-n {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 1.8rem; font-weight: 700;
+  color: var(--text-light);
 }
-.hr-section {
-  padding:1.8rem;
-  border-bottom:1px solid var(--line);
-  flex:1; display:flex; flex-direction:column; gap:.8rem;
+.hst-l {
+  font-family: 'Noto Sans JP', sans-serif; font-size: .7rem; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim);
+  margin-top: .3rem;
 }
-.hr-label {
-  font-family:'JetBrains Mono',monospace; font-size:.56rem;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--c); opacity:.5;
-}
-.hr-val {
-  font-family:'Orbitron',monospace; font-size:2.5rem; font-weight:700;
-  color:var(--c); line-height:1;
-}
-.hr-sub { font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--dim); }
-.hr-list { display:flex; flex-direction:column; gap:.5rem; }
-.hr-li {
-  font-family:'JetBrains Mono',monospace; font-size:.7rem;
-  color:var(--dim); display:flex; align-items:center; gap:.5rem;
-}
-.hr-li::before { content:'◆'; font-size:.45rem; color:var(--p); }
-
-/* ─── TICKER ─── */
-.ticker-wrap {
-  overflow:hidden; background:var(--s1);
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  padding:.65rem 0; position:relative; z-index:1;
-}
-.ticker-inner { position:relative; overflow:hidden; }
-.ticker-inner::before,.ticker-inner::after {
-  content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2;
-}
-.ticker-inner::before { left:0; background:linear-gradient(90deg,var(--s1),transparent); }
-.ticker-inner::after  { right:0; background:linear-gradient(-90deg,var(--s1),transparent); }
-.ticker-track {
-  display:flex; white-space:nowrap;
-  animation:tick 32s linear infinite;
-}
-.ticker-track span {
-  font-family:'JetBrains Mono',monospace; font-size:.67rem;
-  letter-spacing:.1em; color:var(--dim); padding:0 1.8rem;
-}
-.ticker-track span.hi { color:var(--c); opacity:.7; }
-.ticker-track span.s  { color:var(--c); opacity:.25; padding:0 .4rem; }
-@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
 /* ─── SECTION BASE ─── */
-section { padding:6rem 3rem; position:relative; z-index:1; }
-.s-kick {
-  font-family:'JetBrains Mono',monospace; font-size:.62rem;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--c); opacity:.65;
-  margin-bottom:.7rem;
+.section-wrap { max-width: 1150px; margin: 0 auto; padding: 0 3rem; }
+section { padding: 5.5rem 0; }
+section.s-light { background: var(--light-bg); }
+section.s-subtle { background: var(--subtle-bg); }
+section.s-dark { background: var(--dark-bg); }
+.s-label {
+  font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; font-weight: 600;
+  letter-spacing: 1.3px; text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: .8rem;
 }
-.s-kick::before { content:'// '; }
+section.s-dark .s-label { color: var(--tf-purple); }
 .s-title {
-  font-family:'Orbitron',monospace; font-weight:700;
-  font-size:clamp(1.6rem,2.8vw,2.6rem);
-  color:#fff; letter-spacing:.02em; line-height:1.2;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.19; color: var(--text-dark);
 }
+section.s-dark .s-title { color: var(--text-light); }
 
 /* ─── SERVICES ─── */
-.services { background:var(--s1); }
-.svc-lead { max-width:580px; font-size:.84rem; line-height:2; color:var(--dim); margin-top:.8rem; }
-.svc-grid {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:1px; background:var(--line); margin-top:2.5rem;
-  border:1px solid var(--line);
-}
+.svc-lead { max-width: 540px; font-size: .93rem; line-height: 1.7; color: var(--text-mid); margin-top: .7rem; }
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--subtle-bg); margin-top: 2.5rem; border: 1px solid #e5e7ea; }
 .svc {
-  background:var(--bg); padding:3.5rem; position:relative; overflow:hidden;
-  transition:background .3s;
+  background: var(--light-bg); padding: 2.8rem;
+  box-shadow: var(--shadow-micro);
+  transition: background .2s;
 }
-.svc:hover { background:var(--s2); }
-/* top line animation */
-.svc::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,var(--c),var(--p));
-  transform:scaleX(0); transform-origin:left; transition:transform .45s ease;
-}
-.svc:hover::before { transform:scaleX(1); }
-/* corner bracket */
-.svc::after {
-  content:''; position:absolute; bottom:2rem; right:2rem;
-  width:20px; height:20px;
-  border-right:1px solid var(--dim); border-bottom:1px solid var(--dim);
-  opacity:.3; transition:opacity .3s;
-}
-.svc:hover::after { opacity:.7; border-color:var(--c); }
-.svc-id {
-  font-family:'JetBrains Mono',monospace; font-size:.55rem; letter-spacing:.2em;
-  color:var(--c); opacity:.45; margin-bottom:1.8rem;
-}
-.svc-icon { font-size:1.5rem; margin-bottom:.8rem; }
-.svc h3 {
-  font-family:'Orbitron',monospace; font-size:1.05rem; font-weight:700;
-  color:#fff; line-height:1.4; margin-bottom:1.2rem;
-}
-.svc p { font-size:.82rem; line-height:2; color:var(--dim); }
+.svc:hover { background: #fafafa; }
+.svc-id { font-size: .68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.4rem; }
+.svc-icon { font-size: 1.4rem; margin-bottom: .8rem; }
+.svc h3 { font-family: 'Noto Sans JP', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text-dark); line-height: 1.3; margin-bottom: 1rem; }
+.svc p { font-size: .88rem; line-height: 1.8; color: var(--text-mid); }
 
 /* ─── ADVISOR ─── */
-.advisor { }
-.adv-wrap {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:4.5rem; margin-top:2.5rem;
+.adv-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; align-items: start; }
+.adv-bio p { font-size: .93rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.3rem; }
+.adv-bio strong { color: #a78bfa; font-weight: 600; }
+.adv-card {
+  background: var(--darker-bg); border: 1px solid rgba(97,104,117,0.4);
+  border-radius: 8px; overflow: hidden;
+  box-shadow: var(--shadow-micro);
 }
-.adv-bio p { font-size:.84rem; line-height:2.1; color:var(--dim); margin-bottom:1.4rem; }
-.adv-bio strong { color:var(--c); font-weight:400; }
-
-/* fake terminal */
-.adv-term { border:1px solid var(--line); background:var(--s1); }
-.term-bar {
-  display:flex; align-items:center; gap:.8rem;
-  padding:.65rem 1rem; border-bottom:1px solid var(--line);
-  background:var(--s2);
+.card-header {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .75rem 1.2rem; border-bottom: 1px solid rgba(97,104,117,0.3);
+  background: rgba(255,255,255,.03);
 }
-.tdots { display:flex; gap:4px; }
-.td { width:8px; height:8px; border-radius:50%; }
-.td.r { background:#ff3b5c; }
-.td.y { background:#ffcc00; }
-.td.g { color:var(--c); background:var(--c); box-shadow:0 0 4px var(--c); }
-.tb-title { font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--dim); letter-spacing:.08em; }
-.term-row {
-  display:flex; gap:.8rem; align-items:baseline;
-  padding:.85rem 1.2rem; border-bottom:1px solid var(--line);
-  font-family:'JetBrains Mono',monospace; font-size:.73rem; line-height:1.6;
-  color:var(--dim); transition:background .15s, color .15s;
+.cdots { display: flex; gap: 5px; }
+.cd { width: 9px; height: 9px; border-radius: 50%; }
+.cd.r { background: #ff5f57; } .cd.y { background: #febc2e; } .cd.g { background: #28c840; }
+.card-title { font-family: 'Noto Sans JP', sans-serif; font-size: .7rem; color: var(--text-dim); letter-spacing: .05em; }
+.cap-row {
+  display: flex; gap: .9rem; align-items: flex-start;
+  padding: .9rem 1.3rem; border-bottom: 1px solid rgba(97,104,117,0.15);
+  font-size: .85rem; line-height: 1.6; color: var(--text-muted);
+  transition: background .15s;
 }
-.term-row:last-child { border-bottom:none; }
-.term-row:hover { background:rgba(0,238,255,.04); color:var(--text); }
-.tr-arr { color:var(--c); font-size:.62rem; flex-shrink:0; }
+.cap-row:last-child { border-bottom: none; }
+.cap-row:hover { background: rgba(123,66,188,.1); color: var(--text-light); }
+.cap-arr { color: var(--tf-purple); flex-shrink: 0; margin-top: .2rem; font-weight: 700; }
 
 /* ─── TECH ─── */
-.tech { background:var(--s1); }
-.tech-grid {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:1px; background:var(--line); margin-top:2.5rem;
-  border:1px solid var(--line);
-}
-.tb {
-  background:var(--bg); padding:2rem;
-  transition:background .2s;
-}
-.tb:hover { background:var(--s2); }
-.tb-head {
-  font-family:'JetBrains Mono',monospace; font-size:.58rem;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--c);
-  margin-bottom:1.1rem; padding-bottom:.7rem; border-bottom:1px solid var(--line);
-}
-.tags { display:flex; flex-wrap:wrap; gap:.4rem; }
-.tag {
-  font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.04em;
-  padding:.25rem .65rem; background:var(--s1); border:1px solid var(--line);
-  color:var(--dim); transition:all .18s;
-}
-.tag:hover { border-color:var(--c); color:var(--c); box-shadow:0 0 8px rgba(0,238,255,.15); }
+.tech-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #e5e7ea; margin-top: 2.5rem; border: 1px solid #e5e7ea; }
+.tb { background: var(--light-bg); padding: 1.8rem; transition: background .2s; }
+.tb:hover { background: #fafafa; }
+.tb-head { font-size: .7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-bottom: .9rem; padding-bottom: .7rem; border-bottom: 1px solid #e5e7ea; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag { font-size: .75rem; padding: .22rem .7rem; background: var(--subtle-bg); border: 1px solid #d5d7db; border-radius: 4px; color: var(--text-mid); box-shadow: var(--shadow-micro); transition: all .18s; }
+.tag:hover { border-color: var(--tf-purple); color: var(--tf-purple); }
 
 /* ─── COMPANY ─── */
-.co-wrap {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:5rem; margin-top:2.5rem;
-}
-.co-tbl { width:100%; border-collapse:collapse; }
-.co-tbl tr { border-bottom:1px solid var(--line); }
-.co-tbl td { padding:1rem 0; font-size:.82rem; line-height:1.8; vertical-align:top; }
-.co-tbl td:first-child {
-  font-family:'JetBrains Mono',monospace; font-size:.6rem;
-  letter-spacing:.12em; text-transform:uppercase;
-  color:var(--c); opacity:.55; width:27%; padding-right:1.2rem;
-}
-.v-box { border:1px solid var(--line); background:var(--s1); }
-.v-block { padding:1.8rem; border-bottom:1px solid var(--line); }
-.v-block:last-child { border-bottom:none; }
-.v-lbl {
-  font-family:'JetBrains Mono',monospace; font-size:.58rem;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--c);
-  margin-bottom:.6rem;
-}
-.v-block p { font-size:.82rem; line-height:2; color:var(--dim); }
+.co-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; }
+.co-tbl { width: 100%; border-collapse: collapse; }
+.co-tbl tr { border-bottom: 1px solid rgba(97,104,117,0.2); }
+.co-tbl td { padding: .9rem 0; font-size: .88rem; line-height: 1.7; vertical-align: top; color: var(--text-muted); }
+.co-tbl td:first-child { font-size: .68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); width: 26%; padding-right: 1rem; }
+.v-box { display: flex; flex-direction: column; gap: 1.2rem; }
+.v-block { background: var(--darker-bg); padding: 1.8rem; border-radius: 8px; border: 1px solid rgba(97,104,117,0.3); }
+.v-lbl { font-size: .7rem; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; color: var(--tf-purple); margin-bottom: .6rem; }
+.v-block p { font-size: .88rem; line-height: 1.8; color: var(--text-muted); }
 
 /* ─── CONTACT ─── */
-.contact {
-  background:var(--s1); text-align:center;
-  border-top:1px solid var(--line);
-}
-.contact .s-title { color:#fff; }
-.ct-sub {
-  font-family:'JetBrains Mono',monospace; font-size:.78rem; line-height:2;
-  color:var(--dim); margin-top:1rem;
-}
+.contact-inner { text-align: center; max-width: 580px; margin: 0 auto; }
+.ct-sub { font-size: .93rem; line-height: 1.7; color: var(--text-mid); margin-top: 1rem; }
 .ct-btn {
-  display:inline-flex; align-items:center; gap:1rem;
-  font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.1em;
-  color:var(--bg);
-  background:linear-gradient(90deg,var(--c),var(--p));
-  padding:1.1rem 3rem; text-decoration:none; margin-top:3rem;
-  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
-  box-shadow:0 0 30px rgba(0,238,255,.2);
-  transition:opacity .2s, box-shadow .2s;
+  display: inline-flex; align-items: center; gap: .8rem;
+  font-family: 'Noto Sans JP', sans-serif; font-size: .875rem; font-weight: 600;
+  color: #fff; background: var(--tf-purple);
+  padding: 12px 36px; border-radius: 5px;
+  text-decoration: none; margin-top: 2.5rem;
+  box-shadow: var(--shadow-micro);
+  transition: opacity .2s;
 }
-.ct-btn:hover { opacity:.88; box-shadow:0 0 50px rgba(0,238,255,.4); }
+.ct-btn:hover { opacity: .88; }
 
 /* ─── FOOTER ─── */
 footer {
-  background:#020305; padding:1.6rem 3rem;
-  display:flex; justify-content:space-between; align-items:center;
-  border-top:1px solid var(--line); position:relative; z-index:1;
+  background: var(--darker-bg); padding: 2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(97,104,117,0.3);
 }
-footer .logo { font-size:1rem; letter-spacing:.08em; }
-footer p { font-family:'JetBrains Mono',monospace; font-size:.58rem; color:var(--dim); letter-spacing:.08em; opacity:.4; }
-
-/* ─── REVEAL ─── */
-.up { opacity:1; transform:translateY(0); transition:opacity .6s ease,transform .6s ease; }
-.up.in { opacity:1; transform:none; }
-
-/* ─── FOOTER LOGO MARK ─── */
-.footer-logo-mark {
-  width:20px; height:20px;
-  opacity:.65;
-}
+.footer-logo { font-family: 'Noto Sans JP', sans-serif; font-size: .88rem; font-weight: 700; letter-spacing: .04em; color: #fff; text-decoration: none; display: flex; align-items: center; gap: .45rem; }
+footer p { font-size: .72rem; color: var(--text-dim); letter-spacing: .04em; }
 
 /* ─── HAMBURGER ─── */
-.hamburger {
-  display:none;
-  flex-direction:column; justify-content:center; gap:5px;
-  width:36px; height:36px; cursor:pointer;
-  background:none; border:none; padding:4px;
-}
-.hamburger span {
-  display:block; width:100%; height:2px;
-  background:var(--text);
-  transition:all .3s;
-}
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-
-/* モバイルドロワー */
-.mobile-menu {
-  display:none;
-  position:fixed; top:52px; left:0; right:0; z-index:199;
-  background:rgba(5,8,16,.98);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(16px);
-  flex-direction:column;
-}
-.mobile-menu.open { display:flex; }
-.mobile-menu a {
-  display:block; padding:1rem 1.5rem;
-  font-family:'JetBrains Mono',monospace; font-size:.82rem;
-  letter-spacing:.1em; color:var(--dim); text-decoration:none;
-  border-bottom:1px solid var(--line);
-  transition:color .2s, background .2s;
-}
-.mobile-menu a:hover { color:var(--c); background:rgba(0,238,255,.04); }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 100%; height: 2px; background: #fff; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; z-index: 199; background: rgba(13,14,18,.98); border-bottom: 1px solid rgba(97,104,117,0.3); backdrop-filter: blur(12px); flex-direction: column; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { display: block; padding: 1rem 1.5rem; font-size: .9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid rgba(97,104,117,0.2); transition: color .2s; }
+.mobile-menu a:hover { color: #fff; }
 
 @media(max-width:900px){
-  nav ul { display:none; }
-  nav { padding:0 1.5rem; }
-  .hamburger { display:flex; }
-  .hero { grid-template-columns:1fr; }
-  .hero-right { display:none; }
-  .hero-left { padding:5rem 1.5rem 3rem; }
-  section { padding:5rem 1.5rem; }
-  .svc-grid,.adv-wrap,.tech-grid,.co-wrap { grid-template-columns:1fr; gap:1px; }
+  nav ul, .nav-cta { display: none; }
+  nav { padding: 0 1.5rem; }
+  .hamburger { display: flex; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  section .section-wrap { padding: 0 1.5rem; }
+  .svc-grid, .adv-wrap, .tech-grid, .co-wrap { grid-template-columns: 1fr; gap: 1px; }
 }
 </style>
 </head>
@@ -447,210 +265,156 @@ footer p { font-family:'JetBrains Mono',monospace; font-size:.58rem; color:var(-
 <nav>
   <a href="#" class="logo">
     <svg class="logo-mark" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <rect width="500" height="500" fill="#0a0d14"/>
+      <rect width="500" height="500" fill="#0d0e12"/>
       <rect x="0" y="0" width="500" height="500" fill="none" stroke="#ffffff" stroke-width="20"/>
       <line x1="309" y1="0" x2="309" y2="500" stroke="#ffffff" stroke-width="28"/>
       <line x1="0" y1="309" x2="500" y2="309" stroke="#ffffff" stroke-width="28"/>
-      <path d="M 309 0 A 309 309 0 0 0 0 309" fill="none" stroke="#00eeff" stroke-width="22" opacity=".9"/>
+      <path d="M 309 0 A 309 309 0 0 0 0 309" fill="none" stroke="#7b42bc" stroke-width="22" opacity=".9"/>
     </svg>
-    <span style="font-family:'JetBrains Mono',monospace; font-size:.95rem; font-weight:700; letter-spacing:.06em; color:#fff;">81</span>
-    <span style="display:inline-block; width:1px; height:13px; background:#00eeff; opacity:.5; margin:0 3px;"></span>
-    <span style="font-family:'JetBrains Mono',monospace; font-size:.95rem; font-weight:700; letter-spacing:.06em; color:#00eeff;">ZY</span>
+    <span style="color:#fff;">81</span>
+    <span style="display:inline-block;width:1px;height:13px;background:#7b42bc;opacity:.7;margin:0 2px;"></span>
+    <span style="color:#7b42bc;">ZY</span>
   </a>
   <ul>
-    <li><a href="#services">services</a></li>
-    <li><a href="#advisor">advisor</a></li>
-    <li><a href="#tech">technology</a></li>
-    <li><a href="#about">about</a></li>
-    <li><a href="#contact">contact</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#advisor">Advisor</a></li>
+    <li><a href="#tech">Technology</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="メニュー">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="#contact" class="nav-cta">お問い合わせ</a>
+  <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
 </nav>
-
-<!-- モバイルメニュー -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#services" onclick="closeMobile()">services</a>
-  <a href="#advisor" onclick="closeMobile()">advisor</a>
-  <a href="#tech" onclick="closeMobile()">technology</a>
-  <a href="#about" onclick="closeMobile()">about</a>
-  <a href="#contact" onclick="closeMobile()">contact</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#advisor" onclick="closeMobile()">Advisor</a>
+  <a href="#tech" onclick="closeMobile()">Technology</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
 </div>
 
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="blob1"></div>
-  <div class="blob2"></div>
-
-  <div class="hero-left">
-    <div>
-      <div class="h-eyebrow">Cloud × Engineering × Advisory</div>
-      <h1 class="up">
-        事業の成長を、<br>
-        技術の力で<br>
-        <span class="ph">加速する。</span>
-      </h1>
-      <p class="hero-body up">
-        <span class="slash">// </span>25年の実装経験を持つエンジニアが、技術顧問・テックリードとして<br>
-        <span class="slash">// </span>アーキテクチャ設計から技術選定・チーム支援まで包括的にサポートします。
-      </p>
-      <div class="h-actions up">
-        <a href="#contact" class="btn-a">お問い合わせ →</a>
-        <a href="#services" class="btn-b">サービス詳細</a>
-      </div>
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero">
+    <div class="h-label">Cloud × Engineering × Advisory</div>
+    <h1>事業の成長を、技術の力で<br><span class="accent">加速する。</span></h1>
+    <p class="hero-body">25年の実装経験を持つエンジニアが、技術顧問・テックリードとしてアーキテクチャ設計から技術選定・チーム支援まで包括的にサポートします。</p>
+    <div class="h-actions">
+      <a href="#contact" class="btn-primary">お問い合わせ →</a>
+      <a href="#services" class="btn-secondary">サービス詳細</a>
     </div>
     <div class="h-stats">
-      <div class="hst c"><div class="hst-n">25+</div><div class="hst-l">Years of Exp.</div></div>
-      <div class="hst p"><div class="hst-n">2</div><div class="hst-l">Cloud Platforms</div></div>
+      <div class="hst"><div class="hst-n">25+</div><div class="hst-l">Years of Experience</div></div>
+      <div class="hst"><div class="hst-n">Azure / AWS</div><div class="hst-l">Cloud Platforms</div></div>
     </div>
   </div>
+</div>
 
-  <div class="hero-right">
-    <div class="hr-section">
-      <div class="hr-label">Experience</div>
-      <div class="hr-val">25+</div>
-      <div class="hr-sub">Years since 2001</div>
+<!-- SERVICES -->
+<section class="s-light" id="services">
+  <div class="section-wrap">
+    <div class="s-label">Services</div>
+    <h2 class="s-title">提供サービス</h2>
+    <p class="svc-lead">クラウド基盤の設計・構築から、技術顧問としてのチーム支援まで。スタートアップの技術課題に正面から向き合います。</p>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-id">SVC — 001</div><div class="svc-icon">☁️</div><h3>クラウドアーキテクチャ設計</h3><p>Azure・AWS を中心にクラウドネイティブな基盤を設計・構築。Terraform による IaC、Container Apps によるコンテナ化、マイクロサービス環境の構築まで対応。SaaS の本番インフラ構築実績あり。</p></div>
+      <div class="svc"><div class="svc-id">SVC — 002</div><div class="svc-icon">🛠</div><h3>テックリード / 技術顧問</h3><p>CTO 不在のスタートアップや新規事業チーム向けに技術顧問として参画。アーキテクチャレビュー・技術選定・開発プロセス改善・ワークフロー整備など、技術面を包括的にサポートします。</p></div>
     </div>
-    <div class="hr-section">
-      <div class="hr-label">Platforms</div>
-      <div class="hr-val" style="font-size:1.2rem;color:var(--c);">Azure / AWS</div>
-      <div class="hr-sub">Multi-cloud ready</div>
-    </div>
-    <div class="hr-section">
-      <div class="hr-label">Stack — Highlights</div>
-      <div class="hr-list">
-        <div class="hr-li">Terraform · Container Apps</div>
-        <div class="hr-li">CDK V2 · AppFlow</div>
-        <div class="hr-li">PHP / Laravel · Python</div>
-        <div class="hr-li">Node.js · Java · MySQL</div>
+  </div>
+</section>
+
+<!-- ADVISOR -->
+<section class="s-dark" id="advisor">
+  <div class="section-wrap">
+    <div class="s-label">Technical Advisor</div>
+    <h2 class="s-title">技術顧問としてできること</h2>
+    <div class="adv-wrap">
+      <div class="adv-bio">
+        <p>2001年からエンジニアとしてキャリアをスタート。<strong>25年以上</strong>にわたり、大手通信・金融・放送・EC・不動産など多様な業界でシステム開発を担当。プロジェクトリーダー・PM・マネジャーとしてチームの統括経験を持ちます。</p>
+        <p>直近では<strong>SaaS のインフラ構築・運用支援</strong>（Azure / Terraform / Container Apps）や、<strong>複数環境にわたる Aurora MySQL バージョンアップ対応</strong>など、クラウドネイティブな案件を中心に担当。</p>
+        <p>スタートアップから大規模システムまで、フェーズを問わず柔軟に対応。技術的な意思決定を共に担い、チームと長期的な信頼関係を築くことを大切にしています。</p>
+      </div>
+      <div class="adv-card">
+        <div class="card-header"><div class="cdots"><div class="cd r"></div><div class="cd y"></div><div class="cd g"></div></div><span class="card-title">capabilities — 81zy</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>クラウドアーキテクチャの設計レビュー・改善提案</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>技術スタック・ベンダー選定のアドバイス</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>開発チームの立ち上げ支援</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>コードレビュー・品質基準の策定</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>既存システムの技術負債の整理・移行計画</span></div>
+        <div class="cap-row"><span class="cap-arr">→</span><span>PoC 実施・新技術検証のサポート</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="ticker-wrap"><div class="ticker-inner">
-  <div class="ticker-track">
-    <span class="hi">Azure</span><span class="s">◆</span><span>AWS</span><span class="s">◆</span>
-    <span class="hi">Terraform</span><span class="s">◆</span>
-    <span class="hi">Container Apps</span><span class="s">◆</span><span>PHP / Laravel</span><span class="s">◆</span>
-    <span class="hi">Python</span><span class="s">◆</span><span>Node.js</span><span class="s">◆</span>
-    <span class="hi">Java</span><span class="s">◆</span><span>MySQL / PostgreSQL</span><span class="s">◆</span>
-    <span class="hi">Azure</span><span class="s">◆</span><span>AWS</span><span class="s">◆</span>
-    <span class="hi">Terraform</span><span class="s">◆</span>
-    <span class="hi">Container Apps</span><span class="s">◆</span><span>PHP / Laravel</span><span class="s">◆</span>
-    <span class="hi">Python</span><span class="s">◆</span><span>Node.js</span><span class="s">◆</span>
-    <span class="hi">Java</span><span class="s">◆</span><span>MySQL / PostgreSQL</span><span class="s">◆</span>
-  </div>
-</div></div>
-
-<section id="services" class="services">
-  <div class="s-kick">Services</div>
-  <h2 class="s-title up">提供サービス</h2>
-  <p class="svc-lead up">クラウド基盤の設計・構築から、技術顧問としてのチーム支援まで。スタートアップの技術課題に正面から向き合います。</p>
-  <div class="svc-grid">
-    <div class="svc up"><div class="svc-id">SVC — 001</div><div class="svc-icon">☁️</div><h3>クラウドアーキテクチャ設計</h3><p>Azure・AWS を中心にクラウドネイティブな基盤を設計・構築。Terraform による IaC、Container Apps によるコンテナ化、マイクロサービス環境の構築まで対応。SaaS の本番インフラ構築実績あり。</p></div>
-    <div class="svc up"><div class="svc-id">SVC — 002</div><div class="svc-icon">🛠</div><h3>テックリード / 技術顧問</h3><p>CTO 不在のスタートアップや新規事業チーム向けに技術顧問として参画。アーキテクチャレビュー・技術選定・開発プロセス改善・ワークフロー整備など、技術面を包括的にサポートします。</p></div>
-  </div>
-</section>
-
-<section id="advisor">
-  <div class="s-kick">Technical Advisor</div>
-  <h2 class="s-title up">技術顧問としてできること</h2>
-  <div class="adv-wrap">
-    <div class="adv-bio up">
-      <p>2001年からエンジニアとしてキャリアをスタート。<strong>25年以上</strong>にわたり、大手通信・金融・放送・EC・不動産など多様な業界でシステム開発を担当。プロジェクトリーダー・PM・マネジャーとしてチームの統括経験を持ちます。</p>
-      <p>直近では<strong>SaaS のインフラ構築・運用支援</strong>（Azure / Terraform / Container Apps）や、<strong>複数環境にわたる Aurora MySQL バージョンアップ対応</strong>など、クラウドネイティブな案件を中心に担当。</p>
-      <p>スタートアップから大規模システムまで、フェーズを問わず柔軟に対応。技術的な意思決定を共に担い、チームと長期的な信頼関係を築くことを大切にしています。</p>
-    </div>
-    <div class="adv-term up">
-      <div class="term-bar"><div class="tdots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="tb-title">capabilities.sh — 81zy</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>クラウドアーキテクチャの設計レビュー・改善提案</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>技術スタック・ベンダー選定のアドバイス</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>開発チームの立ち上げ支援</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>コードレビュー・品質基準の策定</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>既存システムの技術負債の整理・移行計画</span></div>
-      <div class="term-row"><span class="tr-arr">→</span><span>PoC 実施・新技術検証のサポート</span></div>
+<!-- TECH -->
+<section class="s-subtle" id="tech">
+  <div class="section-wrap">
+    <div class="s-label">Technology Stack</div>
+    <h2 class="s-title">技術スタック</h2>
+    <div class="tech-grid">
+      <div class="tb"><div class="tb-head">Cloud — Azure</div><div class="tags"><span class="tag">Terraform</span><span class="tag">Container Apps</span><span class="tag">Event Hubs</span><span class="tag">App Gateway</span><span class="tag">Key Vault</span></div></div>
+      <div class="tb"><div class="tb-head">Cloud — AWS</div><div class="tags"><span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">RDS / Aurora</span><span class="tag">S3</span><span class="tag">API Gateway</span><span class="tag">ELB</span><span class="tag">CDK V2</span><span class="tag">AppFlow</span></div></div>
+      <div class="tb"><div class="tb-head">Backend</div><div class="tags"><span class="tag">PHP / Laravel</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">Node.js</span><span class="tag">C / C++</span><span class="tag">Perl</span></div></div>
+      <div class="tb"><div class="tb-head">Database</div><div class="tags"><span class="tag">MySQL / Aurora</span><span class="tag">PostgreSQL</span><span class="tag">Oracle</span><span class="tag">DynamoDB</span><span class="tag">Redis</span><span class="tag">Cassandra</span></div></div>
+      <div class="tb"><div class="tb-head">Middleware / Infra</div><div class="tags"><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Apache</span><span class="tag">Elastic</span><span class="tag">Grafana</span><span class="tag">RabbitMQ</span></div></div>
+      <div class="tb"><div class="tb-head">Frontend</div><div class="tags"><span class="tag">Next.js</span><span class="tag">JavaScript</span><span class="tag">jQuery</span><span class="tag">HTML / CSS</span></div></div>
     </div>
   </div>
 </section>
 
-<section id="tech" class="tech">
-  <div class="s-kick">Technology Stack</div>
-  <h2 class="s-title up">技術スタック</h2>
-  <div class="tech-grid up">
-    <div class="tb"><div class="tb-head">Cloud — Azure</div><div class="tags"><span class="tag">Terraform</span><span class="tag">Container Apps</span><span class="tag">Event Hubs</span><span class="tag">App Gateway</span><span class="tag">Key Vault</span></div></div>
-    <div class="tb"><div class="tb-head">Cloud — AWS</div><div class="tags"><span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">RDS / Aurora</span><span class="tag">S3</span><span class="tag">API Gateway</span><span class="tag">ELB</span><span class="tag">CDK V2</span><span class="tag">AppFlow</span></div></div>
-    <div class="tb"><div class="tb-head">Backend</div><div class="tags"><span class="tag">PHP / Laravel</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">Node.js</span><span class="tag">C / C++</span><span class="tag">Perl</span></div></div>
-    <div class="tb"><div class="tb-head">Database</div><div class="tags"><span class="tag">MySQL / Aurora</span><span class="tag">PostgreSQL</span><span class="tag">Oracle</span><span class="tag">DynamoDB</span><span class="tag">Redis</span><span class="tag">Cassandra</span></div></div>
-    <div class="tb"><div class="tb-head">Middleware / Infra</div><div class="tags"><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Apache</span><span class="tag">Elastic</span><span class="tag">Grafana</span><span class="tag">RabbitMQ</span></div></div>
-    <div class="tb"><div class="tb-head">Frontend</div><div class="tags"><span class="tag">Next.js</span><span class="tag">JavaScript</span><span class="tag">jQuery</span><span class="tag">HTML / CSS</span></div></div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="s-kick">Company</div>
-  <h2 class="s-title up">会社概要</h2>
-  <div class="co-wrap">
-    <table class="co-tbl up">
-      <tr><td>会社名</td><td>81zy合同会社（ハイジィ合同会社）</td></tr>
-      <tr><td>代表</td><td>立松直久</td></tr>
-      <tr><td>設立</td><td>2016年9月23日</td></tr>
-      <tr><td>資本金</td><td>3,000,000円</td></tr>
-      <tr><td>所在地</td><td>〒150-0002 東京都渋谷区渋谷3-1-9 YAZAWAビルUCF3階</td></tr>
-      <tr><td>事業内容</td><td>クラウドアーキテクチャ設計・構築<br>技術顧問・テックリード支援<br>システム・コンサルティング</td></tr>
-    </table>
-    <div class="v-box up">
-      <div class="v-block"><div class="v-lbl">Vision</div><p>多様な人材・価値観をもったソフトウェア・サービスを提供し、豊かで公平な社会生活を実現する。</p></div>
-      <div class="v-block"><div class="v-lbl">Mission</div><p>最先端のICT技術を習得し、誰もが使いやすいモノ作りを行う。信頼性の高いソフトウェアを開発・提供し、高度な技術力でお客様のビジネスに貢献する。</p></div>
+<!-- ABOUT -->
+<section class="s-dark" id="about">
+  <div class="section-wrap">
+    <div class="s-label">Company</div>
+    <h2 class="s-title">会社概要</h2>
+    <div class="co-wrap">
+      <table class="co-tbl">
+        <tr><td>会社名</td><td>81zy合同会社（ハイジィ合同会社）</td></tr>
+        <tr><td>代表</td><td>立松直久</td></tr>
+        <tr><td>設立</td><td>2016年9月23日</td></tr>
+        <tr><td>資本金</td><td>3,000,000円</td></tr>
+        <tr><td>所在地</td><td>〒150-0002 東京都渋谷区渋谷3-1-9 YAZAWAビルUCF3階</td></tr>
+        <tr><td>事業内容</td><td>クラウドアーキテクチャ設計・構築<br>技術顧問・テックリード支援<br>システム・コンサルティング</td></tr>
+      </table>
+      <div class="v-box">
+        <div class="v-block"><div class="v-lbl">Vision</div><p>多様な人材・価値観をもったソフトウェア・サービスを提供し、豊かで公平な社会生活を実現する。</p></div>
+        <div class="v-block"><div class="v-lbl">Mission</div><p>最先端のICT技術を習得し、誰もが使いやすいモノ作りを行う。信頼性の高いソフトウェアを開発・提供し、高度な技術力でお客様のビジネスに貢献する。</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="contact">
-  <div class="s-kick">Contact</div>
-  <h2 class="s-title">お問い合わせ</h2>
-  <p class="ct-sub">技術顧問・クラウド設計など、<br>まずはお気軽にご相談ください。</p>
-  <a href="#" class="ct-btn" id="contact-email">✉ &nbsp;お問い合わせはこちら</a>
-<script>
-(function(){
-  var u = [105,110,102,111];
-  var d = [56,49,122,121,46,99,111,46,106,112];
-  var e = String.fromCharCode.apply(null,u)+'@'+String.fromCharCode.apply(null,d);
-  var el = document.getElementById('contact-email');
-  el.href = 'mailto:'+e;
-  el.innerHTML = '✉ &nbsp;'+e;
-})();
-</script>
+<!-- CONTACT -->
+<section class="s-light" id="contact">
+  <div class="section-wrap">
+    <div class="contact-inner">
+      <div class="s-label" style="color:var(--tf-purple);">Contact</div>
+      <h2 class="s-title">お問い合わせ</h2>
+      <p class="ct-sub">技術顧問・クラウド設計など、まずはお気軽にご相談ください。</p>
+      <a href="#" class="ct-btn" id="contact-email">✉ &nbsp;お問い合わせはこちら</a>
+    </div>
+  </div>
+<script>(function(){var u=[105,110,102,111];var d=[56,49,122,121,46,99,111,46,106,112];var e=String.fromCharCode.apply(null,u)+'@'+String.fromCharCode.apply(null,d);var el=document.getElementById('contact-email');el.href='mailto:'+e;el.innerHTML='✉ &nbsp;'+e;})();</script>
 </section>
 
 <footer>
-  <a href="#" class="logo">
-    <svg class="footer-logo-mark" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <rect width="500" height="500" fill="#020305"/>
-      <rect x="0" y="0" width="500" height="500" fill="none" stroke="#ffffff" stroke-width="20"/>
-      <line x1="309" y1="0" x2="309" y2="500" stroke="#ffffff" stroke-width="28"/>
-      <line x1="0" y1="309" x2="500" y2="309" stroke="#ffffff" stroke-width="28"/>
-      <path d="M 309 0 A 309 309 0 0 0 0 309" fill="none" stroke="#00eeff" stroke-width="22" opacity=".9"/>
+  <a href="#" class="footer-logo">
+    <svg style="width:22px;height:22px;flex-shrink:0;" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="500" fill="#0d0e12"/>
+      <rect x="0" y="0" width="500" height="500" fill="none" stroke="#fff" stroke-width="20"/>
+      <line x1="309" y1="0" x2="309" y2="500" stroke="#fff" stroke-width="28"/>
+      <line x1="0" y1="309" x2="500" y2="309" stroke="#fff" stroke-width="28"/>
+      <path d="M 309 0 A 309 309 0 0 0 0 309" fill="none" stroke="#7b42bc" stroke-width="22" opacity=".9"/>
     </svg>
-    <span style="font-family:'JetBrains Mono',monospace; font-size:.95rem; font-weight:700; letter-spacing:.06em; color:#fff;">81</span>
-    <span style="display:inline-block; width:1px; height:13px; background:#00eeff; opacity:.5; margin:0 3px;"></span>
-    <span style="font-family:'JetBrains Mono',monospace; font-size:.95rem; font-weight:700; letter-spacing:.06em; color:#00eeff;">ZY</span>
+    <span style="color:#fff;">81</span><span style="display:inline-block;width:1px;height:12px;background:#7b42bc;opacity:.7;margin:0 2px;"></span><span style="color:#7b42bc;">ZY</span>
   </a>
   <p>© 2016–2026 81zy LLC. All rights reserved. — Shibuya, Tokyo, Japan</p>
 </footer>
 
 <script>
-const ham = document.getElementById('hamburger');
-const mob = document.getElementById('mobile-menu');
-ham.addEventListener('click', () => {
-  ham.classList.toggle('open');
-  mob.classList.toggle('open');
-});
-function closeMobile() {
-  ham.classList.remove('open');
-  mob.classList.remove('open');
-}
+const ham=document.getElementById('hamburger'),mob=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');});
+function closeMobile(){ham.classList.remove('open');mob.classList.remove('open');}
 </script>
 </body>
 </html>
