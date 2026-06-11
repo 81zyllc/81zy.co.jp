@@ -161,6 +161,9 @@ th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;c
 .contact{border-top:1px solid var(--line-dark);text-align:center}
 .contact .eyebrow{justify-content:center}
 .contact p{color:var(--gray);max-width:520px;margin:0 auto 40px;font-size:15px}
+.contact-mail{margin:24px auto 0 !important}
+.contact-mail a{font-family:var(--mono);font-size:14px;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px}
+.contact-mail a:hover{color:var(--gray);border-color:var(--gray)}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line-dark);padding:34px 24px}
@@ -360,6 +363,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
     <h2>お問い合わせ</h2>
     <p>技術顧問・クラウド設計など、まずはお気軽にご相談ください。</p>
     <a class="btn" id="contactBtn" href="#" rel="nofollow">✉ お問い合わせはこちら</a>
+    <p class="contact-mail"><a id="contactMail" href="#" rel="nofollow"></a></p>
   </div>
 </section>
 
@@ -382,13 +386,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
 const btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
 btn.addEventListener('click',()=>links.classList.toggle('open'));
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-// mailto をソースに直接書かず、クリック時に組み立てる(収集ボット対策)
-document.getElementById('contactBtn').addEventListener('click',function(e){
-  e.preventDefault();
-  var u='info';            // ← メールアドレスの @ より前
-  var d=['81zy','co','jp'];// ← ドメインをドットで分割
-  location.href='mai'+'lto:'+u+'@'+d.join('.');
-});
+// mailto をソースに直接書かず、JSで組み立てる(収集ボット対策)
+(function(){
+  var u='info';             // ← メールアドレスの @ より前
+  var d=['81zy','co','jp']; // ← ドメインをドットで分割
+  var addr=u+'@'+d.join('.');
+  var link='mai'+'lto:'+addr;
+  var btn=document.getElementById('contactBtn');
+  if(btn) btn.href=link;
+  var ml=document.getElementById('contactMail');
+  if(ml){ ml.href=link; ml.textContent=addr; }
+})();
 </script>
 </body>
 </html>
